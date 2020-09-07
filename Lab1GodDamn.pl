@@ -59,15 +59,27 @@ parent(lyubov_zharkova,irena_zharkova).
 parent(moisey_pitkovskiy,lev_pitkovskiy).
 parent(elena_pitkovskaya,lev_pitkovskiy).
 
+% Брат / сестра
 sibling(X,Y):-parent(Z,X),parent(Z,Y),X\=Y.
+% Папа
 father(X,Y):-man(X),parent(X,Y).
+% Мама
 mother(X,Y):-woman(X),parent(X,Y).
+% Дедушка
 grandfather(X,Y):-man(X),parent(Z,Y),parent(X,Z).
-grandmother(X,Y):-woman(X),parent(Z,Y),parent(X,Z).
+% Бабушка
+grandmother(X,Y):-woman(X),parent(Z,Y),parent(X,Z).\
+% Сын
 son(X,Y):-man(X),parent(Y,X).
+% Дочь
 doughter(X,Y):-woman(X),parent(Y,X).
+% Дядя
 uncle(X,Y):-man(X),sibling(X,Z),parent(Z,Y).
+% Тётя
 aunt(X,Y):-woman(X),sibling(X,Z),parent(Z,Y).
+% Кузэн / Кузина
 cousine(X,Y):-uncle(Z,Y),parent(Z,X).
+% Двоюродная бабушка
 greataunt(X,Y):-woman(X),sibling(X,Z),(grandfather(Z,Y);grandmother(Z,Y)).
+% Двоюродный дедушка
 greatuncle(X,Y):-woman(X),sibling(X,Z),(grandfather(Z,Y);grandmother(Z,Y)).
